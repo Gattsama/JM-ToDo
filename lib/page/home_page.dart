@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/provider/todos_provider.dart';
 import 'package:todo/widget/add_todo_dialog_widget.dart';
 import 'package:todo/widget/todo_list_widget.dart';
 
@@ -20,6 +22,25 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('ToDo App'),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.arrow_upward),
+              onPressed: () {
+                Provider.of<TodosProvider>(context, listen: false)
+                    .controller
+                    .jumpTo(0);
+              }),
+          IconButton(
+              icon: Icon(Icons.arrow_downward),
+              onPressed: () {
+                Provider.of<TodosProvider>(context, listen: false)
+                    .controller
+                    .jumpTo(Provider.of<TodosProvider>(context, listen: false)
+                        .controller
+                        .position
+                        .maxScrollExtent);
+              })
+        ],
       ),
       body: tabs[selectedIndex],
       floatingActionButton: FloatingActionButton(

@@ -16,6 +16,7 @@ class TodoListWidget extends StatelessWidget {
             style: TextStyle(fontSize: 30),
           ))
         : ListView.separated(
+            controller: Provider.of<TodosProvider>(context).controller,
             separatorBuilder: (BuildContext context, int index) =>
                 Container(height: 10),
             physics: BouncingScrollPhysics(),
