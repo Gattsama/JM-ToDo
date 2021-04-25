@@ -23,7 +23,11 @@ class TodosProvider extends ChangeNotifier {
             '-Yes Sir\n-It would be Tsss\'s pleasure\n-Please teach Tsss'),
     Todo(createdTime: DateTime.now(), title: 'Train Tsss'),
     Todo(createdTime: DateTime.now(), title: 'Fuck Marlenea'),
-    Todo(createdTime: DateTime.now(), title: 'Mind Wipe Marlenea'),
+    Todo(
+        createdTime: DateTime.now(),
+        title: 'Mind Wipe Marlenea',
+        description:
+            '-Please tell me what to do, I can not think for myself\n-Please tell me what to do, I can not think on my own'),
     Todo(createdTime: DateTime.now(), title: 'Re-program Tsss'),
     Todo(createdTime: DateTime.now(), title: 'LAST'),
   ];
