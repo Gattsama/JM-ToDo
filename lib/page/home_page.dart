@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:todo/provider/todos_provider.dart';
 import 'package:todo/widget/add_todo_dialog_widget.dart';
 import 'package:todo/widget/todo_list_widget.dart';
+import 'package:todo/widget/completed_list_widget.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final tabs = [
       TodoListWidget(),
-      Container(color: Colors.purple),
+      CompletedTodoListWidget(),
     ];
 
     return Scaffold(
@@ -68,7 +69,9 @@ class _HomePageState extends State<HomePage> {
         },
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.fact_check_outlined), label: 'ToDo'),
+            icon: Icon(Icons.fact_check_outlined),
+            label: 'ToDo',
+          ),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.done,

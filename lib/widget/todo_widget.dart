@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:provider/provider.dart';
 import 'package:todo/model/todo.dart';
+import 'package:todo/provider/todos_provider.dart';
+import 'package:todo/widget/utils.dart';
+import 'package:todo/page/edit_todo_page.dart';
 
 class TodoWidget extends StatelessWidget {
   final Todo todoItem;
@@ -9,6 +13,18 @@ class TodoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void deleteTodo(Todo todo) {
+      Provider.of<TodosProvider>(context, listen: false).deleteTodo(todo);
+      Utils.showSnackBar(context, 'Training Deleted');
+    }
+
+    void editTodo(BuildContext context, Todo todo) =>
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => EditToDos(todo: todo),
+          ),
+        );
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
       child: Slidable(
@@ -20,7 +36,7 @@ class TodoWidget extends StatelessWidget {
             caption: 'Edit',
             color: Colors.green,
             icon: Icons.edit,
-            onTap: () {},
+            onTap: () => editTodo(context, todoItem),
           )
         ],
         secondaryActions: [
@@ -28,7 +44,7 @@ class TodoWidget extends StatelessWidget {
             caption: 'Delete',
             color: Colors.red,
             icon: Icons.delete,
-            onTap: () {},
+            onTap: () => deleteTodo(todoItem),
           )
         ],
         child: Container(
@@ -41,10 +57,15 @@ class TodoWidget extends StatelessWidget {
                 checkColor: Colors.white,
                 value: todoItem.isDone,
                 onChanged: (_) {
-                  print('checked');
-                  todoItem.isDone = !todoItem.isDone;
-                  print(todoItem.isDone);
-                }, //TODO ADD FUNCTION ON CHECKED
+                  final isDone =
+                      Provider.of<TodosProvider>(context, listen: false)
+                          .toogleTodoStatus(todoItem);
+                  Utils.showSnackBar(
+                      context,
+                      isDone
+                          ? 'Training Completed'
+                          : 'Training is not yet complete');
+                },
               ),
               SizedBox(width: 20),
               Expanded(
