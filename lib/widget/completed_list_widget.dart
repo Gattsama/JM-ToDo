@@ -12,7 +12,7 @@ class CompletedTodoListWidget extends StatelessWidget {
     return todos.isEmpty
         ? Center(
             child: Text(
-              'No Completed Training To Review',
+              'No Completed Training\nTo Review',
               style: TextStyle(fontSize: 30),
               textAlign: TextAlign.center,
             ),
